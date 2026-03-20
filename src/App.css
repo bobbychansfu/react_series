@@ -25,3 +25,22 @@ hr {
   width: 70vw;
   max-width: 100%;
 }
+
+.logo {
+  height: 1em;
+  animation: logo-spin infinite 20s linear;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.heart {
+  cursor: pointer;
+  font-size: 1.5em;
+}
