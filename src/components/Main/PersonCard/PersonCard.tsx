@@ -1,6 +1,7 @@
-import type { Person } from "@models/PersonType";
+import type { Person } from "@models";
 import styles from "./PersonCard.module.css";
 import { Card, Col, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function PersonCard({
   person,
@@ -21,7 +22,12 @@ function PersonCard({
         ) : (
           <>
             <Card>
-              <Card.Img variant="top" src={person.profilePic} />
+              <Link
+                to={`/people/${person.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Card.Img variant="top" src={person.profilePic} />
+              </Link>
               <Card.Body>
                 <Card.Title>{person.name}</Card.Title>
               </Card.Body>

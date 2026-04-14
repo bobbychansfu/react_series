@@ -3,5 +3,6 @@ export type Person = {
   name: string;
   age: number;
   fav: boolean;
+  seed: string;
   profilePic?: string;
 };

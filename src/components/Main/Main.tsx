@@ -1,10 +1,11 @@
 import { useState } from "react";
 import useFetchRandomUser from "@hooks/useFetchRandomUser";
-import type { Person } from "@models/PersonType";
+import type { Person } from "@models";
 import PersonCard from "./PersonCard/PersonCard";
 import { Container, Row } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 
-function Main() {
+function Main({ query }: { query: string }) {
   const [numPeople, setNumPeople] = useState(0);
   const { peopleList, loading, setPeopleList } = useFetchRandomUser(numPeople);
 
@@ -22,17 +23,22 @@ function Main() {
     );
   }
 
+  const filteredPeopleList = peopleList.filter((person) =>
+    person.name.toLowerCase().includes(query.toLowerCase()),
+  );
+
   const loadingPerson: Person = {
     name: "Loading...",
     age: -1,
     fav: false,
     id: -1,
+    seed: "",
   };
   return (
     <>
       <Container>
         <Row>
-          {peopleList.slice(0, numPeople).map((person) => (
+          {filteredPeopleList.slice(0, numPeople).map((person) => (
             <PersonCard
               key={person.id}
               person={person}
@@ -57,6 +63,8 @@ function Main() {
       >
         Load Random Person
       </button>
+
+      <Outlet context={{ peopleList: filteredPeopleList }} />
     </>
   );
 }
